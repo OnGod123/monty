@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 /**
@@ -10,20 +9,21 @@
  *         NULL on failure.
  */
 char *readFileToString(const char *file_name) {
-long file_size;
-char *content;
-FILE *file;
-   file = fopen(file_name, "r");
+    long file_size;
+    char *content;
+    FILE *file;
+
+    file = fopen(file_name, "r");
     if (file == NULL) {
         perror("Error opening file");
         exit(EXIT_FAILURE);
     }
 
     fseek(file, 0, SEEK_END);
-     file_size = ftell(file);
+    file_size = ftell(file);
     rewind(file);
 
-    content = (char *)malloc(file_size + 1);
+    content = (char *)malloc(file_size + 1);  
     if (content == NULL) {
         perror("Error allocating memory");
         exit(EXIT_FAILURE);
@@ -35,3 +35,4 @@ FILE *file;
     fclose(file);
     return content;
 }
+
